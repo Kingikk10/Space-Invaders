@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="assetslibrary.cpp" />
     <ClCompile Include="collisiontest.cpp" />
+    <ClCompile Include="Enemey.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Source.cpp" />

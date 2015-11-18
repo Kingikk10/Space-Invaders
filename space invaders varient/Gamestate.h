@@ -8,7 +8,7 @@ class Gamestate
 
 	Player player;
 	std::vector<Missile> missile;
-
+	std::vector<Enemey> enemey;
 public:
 	
 	void spawnMissile(float x , float y , float dx , float dy, float lifespan)
@@ -25,17 +25,43 @@ public:
 	}
 	
 	//void death();
-	//void enemey();
 
+	void spawnEnemey(float x, float y, float dx, float dy)
+	{
+		for (int i = 0; i < enemey.size(); ++i)
+		{
+			if (!enemey[i].isActive) // Find an empty spot in our vector
+			{
+				enemey[i] = Enemey();
+				return;
+			}
+		}
+
+
+
+
+	}
 	Gamestate()
 	{
 		GameObject::gs() = this;
 	}
 	void update()
 	{
-
+	
 		if (player.isActive)
 				player.update();
+
+
+
+		for (int i = 0; i < enemey.size(); ++i)
+			if (enemey[i].isActive)
+			{
+				enemey[i].update();
+				if (player.isActive)
+					doCollision(player, enemey[i]);
+			}
+
+
 
 
 		int nMissileActive = 0;
@@ -68,6 +94,11 @@ public:
 	void draw()
 	{
 		if (player.isActive) player.draw();
+
+		for (int i = 0; i < enemey.size(); ++i)
+			if (enemey[i].isActive)
+				enemey[i].draw();
+
 
 		for (int i = 0; i < missile.size(); ++i)
 			if (missile[i].isActive)

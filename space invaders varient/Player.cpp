@@ -16,7 +16,6 @@ void Player::update()
 				x -= speed * sfw::getDeltaTime();
 			}
 		}
-
 		if (sfw::getKey(262))
 		{
 			if (x <= 770)
@@ -29,9 +28,5 @@ void Player::update()
 			fireDelay = fireRate;
 			gs()->spawnMissile(x, y, 0, 300, 4.f);
 		}
-
-
-//		player.draw();
-	//	sfw::drawTexture(player, x, y, 50, 50, 0, true, 20);
 	}
 }

@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "Gamestate.h"
 #include <vector>
+#include "AssetLibrary.h"
 
 
 struct Background
@@ -24,9 +25,10 @@ void level1()
 void main()
 {
 	sfw::initContext(800, 600, "Space Invaders");
-	unsigned player = sfw::loadTextureMap("./textures/spaceship.jpg");
-	unsigned missile = sfw::loadTextureMap("./textures/creatures.png", 8, 80);
-	unsigned enemy = sfw::loadTextureMap("./textures/ships.png", 8, 80);
+	loadTexture("player", "./textures/spaceship.jpg", 1, 1);
+	loadTexture("missile","./textures/creatures.png", 8, 80);
+	loadTexture("enemey", "./textures/ships.png", 8, 80);
+
 	
 	Gamestate game;
 	Player p;

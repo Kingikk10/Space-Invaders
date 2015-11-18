@@ -4,7 +4,7 @@
 #include "AssetLibrary.h"
 #include <iostream>
 #include "GameObject.h"
-//#include "Gamestate.h"
+
 
 
 class Gamestate;
@@ -78,14 +78,13 @@ public:
 
 
 		x += velx *sfw::getDeltaTime();
-		y += velx *sfw::getDeltaTime();
+		y += vely *sfw::getDeltaTime();
 
 			
 	}
 	virtual void draw()
 	{
-
-		sfw::drawTexture(missile, x, y, 50, 50, 0, true, 48);
+		sfw::drawTexture(getTexture("missile"), x, y, 50, 50, 0, true, 48);
 
 	}
 
@@ -101,7 +100,7 @@ public:
 	float speed;
 	float fireDelay;
 	float fireRate;
-	unsigned player;
+	
 
 	Player() : x(400), y(50), speed(300), fireDelay(1), fireRate(1) {}
 
@@ -111,12 +110,9 @@ public:
 
 	virtual void draw()
 	{
-		sfw::drawTexture(player, x, y, 50, 50, 0, true, 20);
+		sfw::drawTexture(getTexture("player"), x, y, 50, 50, 0, true, 0);
 	
 	}
-	//sfw::drawTexture(getTexture(textureName), x, y, width, height, angle, true, currentFrame);
-
-
 };
 
 
@@ -125,17 +121,22 @@ class Enemey : public GameObject
 public:
 	float x, y;
 	float speed;
-	unsigned enemy;
-	Enemey() :x(), y(), speed()  {enemy = sfw::loadTextureMap("./textures/ships.png", 8, 80); }
-	void update()
-	{
-		if (x > 0)
-		{
-          sfw::drawTexture(enemy, 50, 550, 50, 50, 0, true, 20);
-		  
-		}
-	}
+	//(float a_x1, float a_y1, float dx1, float dy1)
+	Enemey(): x(50), y(500), speed(300) {}
+	
+		
+		y -= speed *sfw::getDeltaTime();
 
+	
+		virtual void onCollision(GameObject &go, float distance) {}
+
+		virtual void update();
+
+		virtual void draw()
+		{
+			sfw::drawTexture(getTexture("enemey"), x, y, 50, 50, 0, true, 0);
+
+		}
 
 	
 
