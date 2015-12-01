@@ -22,7 +22,7 @@ public:
 	}
 
 	float x, y, width, height, radius, angle;
-	
+	int lifes;
 	bool isActive;
 	
 	
@@ -98,10 +98,11 @@ public:
 	float speed;
 	float fireDelay;
 	float fireRate;
-	int lifes = 3;
+	
 
 	Player() : speed(300), fireDelay(1), fireRate(1)
 	{
+		lifes = 3;
 		x = 400;
 		y = 50;
 	}
@@ -111,7 +112,7 @@ public:
 	//	- distance is the penetration distance? (idk esme wrote the func not me)
 	virtual void onCollision(GameObject &go, float distance)
 	{
-		lifes - 1;
+		lifes -= 1;
 		std::cout << "lives are" << lifes << std::endl;
 	}
 
@@ -137,10 +138,6 @@ public:
 
 		speed = 75;
 	}
-	
-		
-	//	y -= speed *sfw::getDeltaTime();
-
 	
 		virtual void onCollision(GameObject &go, float distance)
 		{

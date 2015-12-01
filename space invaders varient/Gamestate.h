@@ -7,12 +7,13 @@
 class Gamestate
 {
 
-	Player player;
+	
 	std::vector<Missile> missile;
 	std::vector<Enemy> enemy;
 
 	int enemyCount = 3;
 public:
+	Player player;
 	
 	void spawnMissile(float x , float y , float dx , float dy, float lifespan)
 	{
@@ -30,14 +31,13 @@ public:
 		missile.push_back(Missile(x, y, dx, dy, lifespan));
 	}
 	
-	//void death();
+	
 
 	void spawnEnemy(float x, float y, float dx, float dy)
 	{
 		// search for an inactive enemy
 		for (int i = 0; i < enemy.size(); ++i)
 		{
-			std::cout << i << std::endl;
 			if (!enemy[i].isActive) // Find an empty spot in our vector
 			{
 				enemy[i] = Enemy(x, y, dx, dy);
@@ -112,13 +112,10 @@ public:
 				}
 
 			
-
+			
 	
-			if (player.lifes = 0)
-			{
-				system("pause");
-
-			}
+			
+		
 
 	}
 
