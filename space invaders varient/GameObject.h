@@ -95,13 +95,16 @@ public:
 class Player : public GameObject
 {
 public:
-	float x, y;
 	float speed;
 	float fireDelay;
 	float fireRate;
 	int lifes = 3;
 
-	Player() : x(400), y(50), speed(300), fireDelay(1), fireRate(1) {}
+	Player() : speed(300), fireDelay(1), fireRate(1)
+	{
+		x = 400;
+		y = 50;
+	}
 
 	// called when a collision has occurred for this GameObject
 	//	- 'go' is the gameobject that it collided with
@@ -109,6 +112,7 @@ public:
 	virtual void onCollision(GameObject &go, float distance)
 	{
 		lifes - 1;
+		std::cout << "lives are" << lifes << std::endl;
 	}
 
 	virtual void update();

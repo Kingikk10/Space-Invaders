@@ -1,11 +1,14 @@
 #include "GameObject.h"
 #include "Gamestate.h"
 
+#include <iostream>
 
 void Player::update()
 {
 	
 	fireDelay -= sfw::getDeltaTime();
+
+	std::cout << fireDelay << std::endl;
 
 	
 	{

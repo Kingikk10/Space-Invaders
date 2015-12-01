@@ -10,6 +10,8 @@ class Gamestate
 	Player player;
 	std::vector<Missile> missile;
 	std::vector<Enemy> enemy;
+
+	int enemyCount = 3;
 public:
 	
 	void spawnMissile(float x , float y , float dx , float dy, float lifespan)
@@ -63,38 +65,42 @@ public:
 		int nMissileActive = 0;
 		
 			for (int i = 0; i < missile.size(); ++i)
-			 if (missile[i].isActive)
-			 {
-			missile[i].update();
-			if (player.isActive)
-				 doCollision(player, missile[i]);
-			}
-		else nMissileActive++;
+				if (missile[i].isActive)
+				{
+					missile[i].update();
+				}
+				else nMissileActive++;
 		
 		
 					// Collision detection between two objects of the same type
 			for (int i = 0; i + 1 < missile.size(); ++i)
 			 for (int j = i + 1; j < missile.size(); ++j)
 			 {
-				 doCollision(missile[i], missile[j]);
+				 if (missile[i].isActive && missile[j].isActive)
+					doCollision(missile[i], missile[j]);
 			 }
 
 			int nEnemy = 0;
-			int s = 3;
+			
 			for (int i = 0; i < enemy.size(); ++i)
 			{
 				if (enemy[i].isActive)
 				{
 					nEnemy++;
 					enemy[i].update();
-					doCollision(enemy[i], player);
+					doCollision(player, enemy[i]);
 
 				}
 				if (enemy[i].y < 0)
 				{
 					enemy[i].isActive = false;
-				}
-				
+					enemyCount++;
+				}	
+			}
+
+			if (nEnemy < enemyCount)
+			{
+				spawnEnemy(rand() % 800, 600, 50, 50);// Spawn a new wave of enemies 
 			}
 
 			// check for collision between ENEMY and MISSILE
@@ -106,10 +112,7 @@ public:
 				}
 
 			
-			if (nEnemy < s)
-			{
-				spawnEnemy(rand() % 800, 600, 50, 50);// Spawn a new wave of enemies 
-			}
+
 	
 			if (player.lifes = 0)
 			{
