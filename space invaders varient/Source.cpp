@@ -33,12 +33,11 @@ void main()
 	Gamestate game;
 	Player p;
 	Background b;
-	Enemey e;
+
 	while (sfw::stepContext())
 	{
 		b.level1();
-		/*p.update();
-		e.update();*/
+	
 		game.update();
 		game.draw();
 	}

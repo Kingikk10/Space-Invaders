@@ -1,18 +1,20 @@
 #pragma once
 #include "GameObject.h"
 #include <vector>
-
+#include <stdlib.h>
+#include "collisiontest.h"
 
 class Gamestate
 {
 
 	Player player;
 	std::vector<Missile> missile;
-	std::vector<Enemey> enemey;
+	std::vector<Enemy> enemy;
 public:
 	
 	void spawnMissile(float x , float y , float dx , float dy, float lifespan)
 	{
+		// search
 		for (int i = 0; i < missile.size(); ++i)
 		{
 			if (!missile[i].isActive)
@@ -21,49 +23,43 @@ public:
 				return;
 			}
 		}
+
+		// otherwise, add another
 		missile.push_back(Missile(x, y, dx, dy, lifespan));
 	}
 	
 	//void death();
 
-	void spawnEnemey(float x, float y, float dx, float dy)
+	void spawnEnemy(float x, float y, float dx, float dy)
 	{
-		for (int i = 0; i < enemey.size(); ++i)
+		// search for an inactive enemy
+		for (int i = 0; i < enemy.size(); ++i)
 		{
-			if (!enemey[i].isActive) // Find an empty spot in our vector
+			std::cout << i << std::endl;
+			if (!enemy[i].isActive) // Find an empty spot in our vector
 			{
-				enemey[i] = Enemey();
+				enemy[i] = Enemy(x, y, dx, dy);
 				return;
 			}
 		}
 
-
-
-
+		// if none, add another enemy to the vector
+		enemy.push_back(Enemy(x, y, dx, dy));
 	}
+
 	Gamestate()
 	{
 		GameObject::gs() = this;
 	}
 	void update()
 	{
-	
+
 		if (player.isActive)
-				player.update();
+			player.update();
 
 
-
-		for (int i = 0; i < enemey.size(); ++i)
-			if (enemey[i].isActive)
-			{
-				enemey[i].update();
-				if (player.isActive)
-					doCollision(player, enemey[i]);
-			}
-
-
-
-
+		
+		
 		int nMissileActive = 0;
 		
 			for (int i = 0; i < missile.size(); ++i)
@@ -75,10 +71,6 @@ public:
 			}
 		else nMissileActive++;
 		
-			if (nMissileActive == 0)
-			 {
-							// Spawn a new wave of enemies (obviously not using Bullets >__>)
-			 }
 		
 					// Collision detection between two objects of the same type
 			for (int i = 0; i + 1 < missile.size(); ++i)
@@ -87,7 +79,43 @@ public:
 				 doCollision(missile[i], missile[j]);
 			 }
 
+			int nEnemy = 0;
+			int s = 3;
+			for (int i = 0; i < enemy.size(); ++i)
+			{
+				if (enemy[i].isActive)
+				{
+					nEnemy++;
+					enemy[i].update();
+					doCollision(enemy[i], player);
 
+				}
+				if (enemy[i].y < 0)
+				{
+					enemy[i].isActive = false;
+				}
+				
+			}
+
+			// check for collision between ENEMY and MISSILE
+			for (int i = 0; i < enemy.size(); ++i)
+				for (int j = 0; j < missile.size(); ++j)
+				{
+					if (enemy[i].isActive && missile[j].isActive)
+						doCollision(enemy[i], missile[j]);
+				}
+
+			
+			if (nEnemy < s)
+			{
+				spawnEnemy(rand() % 800, 600, 50, 50);// Spawn a new wave of enemies 
+			}
+	
+			if (player.lifes = 0)
+			{
+				system("pause");
+
+			}
 
 	}
 
@@ -95,9 +123,9 @@ public:
 	{
 		if (player.isActive) player.draw();
 
-		for (int i = 0; i < enemey.size(); ++i)
-			if (enemey[i].isActive)
-				enemey[i].draw();
+		for (int i = 0; i < enemy.size(); ++i)
+			if (enemy[i].isActive)
+				enemy[i].draw();
 
 
 		for (int i = 0; i < missile.size(); ++i)

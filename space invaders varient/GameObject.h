@@ -13,7 +13,7 @@ class GameObject
 {
 public:
 
-
+	
 	static Gamestate *&gs()
 	{
 		static Gamestate *game;
@@ -66,8 +66,7 @@ public:
 	}
 	virtual void onCollision(GameObject &go, float distance)
 	{
-
-		//reactions
+		isActive = false;
 
 	}
 	virtual void update()
@@ -100,11 +99,17 @@ public:
 	float speed;
 	float fireDelay;
 	float fireRate;
-	
+	int lifes = 3;
 
 	Player() : x(400), y(50), speed(300), fireDelay(1), fireRate(1) {}
 
-	virtual void onCollision(GameObject &go, float distance) {}
+	// called when a collision has occurred for this GameObject
+	//	- 'go' is the gameobject that it collided with
+	//	- distance is the penetration distance? (idk esme wrote the func not me)
+	virtual void onCollision(GameObject &go, float distance)
+	{
+		lifes - 1;
+	}
 
 	virtual void update();
 
@@ -116,19 +121,27 @@ public:
 };
 
 
-class Enemey : public GameObject
+class Enemy : public GameObject
 {
 public:
-	float x, y;
 	float speed;
-	//(float a_x1, float a_y1, float dx1, float dy1)
-	Enemey(): x(50), y(500), speed(300) {}
+
+	Enemy(float a_x, float a_y, float dx, float dy)
+	{
+		x = a_x;
+		y = a_y;
+
+		speed = 75;
+	}
 	
 		
-		y -= speed *sfw::getDeltaTime();
+	//	y -= speed *sfw::getDeltaTime();
 
 	
-		virtual void onCollision(GameObject &go, float distance) {}
+		virtual void onCollision(GameObject &go, float distance)
+		{
+			isActive = false;
+		}
 
 		virtual void update();
 

@@ -52,4 +52,9 @@ float doCollision(GameObject &go1, GameObject &go2)
 		go2.onCollision(go1, distance);
 	}
 	return distance;
+	/*if (distance <= 0)
+	{
+		return true;
+	}
+*/
 }
