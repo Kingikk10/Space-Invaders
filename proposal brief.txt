@@ -1,0 +1,60 @@
+1.basis of space invaders
+2.random enemys firing
+3.set speed of projectiles from player
+4.lives
+5.changing background
+6.score
+7.levels?
+_______________________________________________________
+
+11/9/15
+
+Player boundries colides with walls and stops (DONE)
+-
+Player fires projectiles
+(issues)
+	-missile does not continue to move on its own
+	-resets back to start does not fully cross screen(fixed)
+	-lag upon button press [need optimization?](fixed?)
+	-upon fixing 2 and 3, doesnot launch at player
+_______________________________________________________
+
+11/10/15
+
+Implement gameobject
+Implement assestlibrary, animations
+__________________________________________________________
+
+11/16/15
+
+Fixed launch at player
+fixed lag upon launch
+Now follows player position once launched (needs fix)
+button must be pressed to continue to move (needs fix)
+
+_______________________________________________________________
+
+11/17/15
+
+Implemented Gamestate
+but broke textures
+(did someother stuff but dont remember)
+____________________________________________________________
+
+11/18/15
+
+Fixed textures
+missile launch at player, continues on its own without button hold
+missile deletes self after timer
+----
+working on enemeys and collision with enemeys
+
+
+
+
+
+
+
+
+
+

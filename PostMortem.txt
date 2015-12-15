@@ -1,0 +1,4 @@
+	During creation of my space invaders attempt, i decided to try to recreate or come close to creating space invaders instead of trying something completely diffrent. I chose to do this so i had a set end goal and not an idea of a goal.
+	The challenges that i faced during creation of the project were more minor bugs that i was to determined to figure out on my own. I would get close to the code needed but never exactly right. when I finally asked for help it was only about 1 line off. I feel like if i did ask for help the second i couldnt figure it out, i would have had more features.
+	Other than being to detemined, I feel that i generally had good time management, or better time management than last assignment, when completing the project. 
+	If I were to do this again, i honestly wouldn't do it much diffrent. i would just use what i learned from it to complete it faster and to implement more features.
